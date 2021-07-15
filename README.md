@@ -8,7 +8,7 @@ The setup uses a combination of Kubernetes StatefulSets and PersistentVolumeClai
 This will spin up 6 `redis-cluster` pods one by one, which may take a while. After all pods are in a running state, you can itialize the cluster using the `redis-trib` command in any of the pods. After the initialization, you will end up with 3 master and 3 slave nodes.
 ``` bash
 kubectl exec -it redis-cluster-0 -- redis-trib create --replicas 1 \
-$(kubectl get pods -l app=redis -o jsonpath='{range.items[*]}{.status.podIP}:6379 ')
+$(kubectl get pods -l app=redis -o jsonpath='{range.items[*]}{.status.podIP}:6379 {end}')
 ```
 
 ## Adding nodes
